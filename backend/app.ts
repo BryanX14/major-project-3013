@@ -9,8 +9,7 @@ import {
   parseToken,
   addPost,
   posts,
-  sleep,
-  loading,
+  sleep
 } from "./fakedb";
 
 const port = 8085;
@@ -19,6 +18,7 @@ app.use(cors());
 app.use(express.json());
 
 // TODO: Obviously use a more secure signing key than "secret"
+
 app.post("/api/user/login", (req, res) => {
   try {
     const { email, password } = req.body;
@@ -65,9 +65,24 @@ app.get("/api/posts/:id", (req, res) => {
  *     What if you make a request to this route with a valid token but
  *     with an empty/incorrect payload (post)
  */
+
+
+
+/** 
+export const decodeUserToken = (token: string): IDecodedUser => {
+  const decoded = jwt.verify(token, "secret") as { user: IDecodedUser };
+  return decoded.user;
+};
+*/
 app.post("/api/posts", (req, res) => {
+  /** 
+  const authHeader = req.headers.authorization;
+  const token = parseToken(authHeader, res);
+  const user = decodeUserToken(token);
+  */
   const incomingPost = req.body;
-  addPost(incomingPost);
+  /**incomingPost.userId = user.id;*/
+  addPost(incomingPost, /**user.id*/); 
   res.status(200).json({ success: true });
 });
 

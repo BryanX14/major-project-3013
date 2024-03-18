@@ -33,7 +33,7 @@ export const posts = [
 ]
 
 
-export const addPost = (post: any) => {
+export const addPost = (post: any, /**userId: any*/) => {
   post.id = posts.length + 1;
   post.userId = "Main User";
   posts.push(post);
